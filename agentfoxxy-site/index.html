@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>AgentFOXXY — The AI Agent That Does Not Just Talk, It Does The Work</title>
+<meta name="description" content="AgentFOXXY is a free, open-source (MIT) AI agent that plans, codes, runs and fixes real work on your machine. 40+ powers, 35+ AI providers, browser and desktop control, persistent memory, and messaging from your phone. Install with one command." />
+<meta name="theme-color" content="#05060a" />
+<meta name="color-scheme" content="dark" />
+<link rel="canonical" href="https://github.com/usmanxg58-byte/AgentFOXXY" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AgentFOXXY — The AI Agent That Does Not Just Talk" />
+<meta property="og:description" content="Self-improving. Model-free. 40+ powers. Runs anywhere. Free and open source, MIT licensed." />
+<meta property="og:url" content="https://github.com/usmanxg58-byte/AgentFOXXY" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AgentFOXXY — The AI Agent That Does Not Just Talk" />
+<meta name="twitter:description" content="Self-improving. Model-free. 40+ powers. Runs anywhere. Free and open source, MIT licensed." />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%98%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://img.shields.io" crossorigin />
+
+<link rel="stylesheet" href="./assets/css/style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/"
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ambient background layers -->
+<div class="bg" aria-hidden="true">
+  <div class="bg__grid"></div>
+  <div class="bg__glow bg__glow--a"></div>
+  <div class="bg__glow bg__glow--b"></div>
+  <div class="bg__noise"></div>
+</div>
+
+<!-- custom cursor (injected by cursor.js) -->
+<div class="cursor-layer" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav__inner shell">
+    <a class="brand" href="#top" data-cursor="link" aria-label="AgentFOXXY home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5l7 5M28 5l-7 5" />
+          <path d="M16 10c5 0 9 4 9 9s-4 8-9 8-9-3-9-8 4-9 9-9Z" />
+          <path d="M11.5 18.5l2.2 2.2M20.5 18.5l-2.2 2.2" />
+          <path d="M16 23.5l-1.6 1.4M16 23.5l1.6 1.4" />
+        </svg>
+      </span>
+      <span class="brand__text">Agent<b>FOXXY</b></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#powers" data-cursor="link">Powers</a>
+      <a href="#compare" data-cursor="link">Compare</a>
+      <a href="#install" data-cursor="link">Install</a>
+      <a href="#use" data-cursor="link">Use</a>
+      <a href="#faq" data-cursor="link">FAQ</a>
+    </nav>
+
+    <div class="nav__cta">
+      <a class="btn btn--ghost btn--sm" href="https://github.com/usmanxg58-byte/AgentFOXXY/releases/latest" target="_blank" rel="noopener" data-cursor="link">Download</a>
+      <a class="btn btn--primary btn--sm magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY" target="_blank" rel="noopener" data-cursor="link">
+        <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.33C3.8 14.29 3.32 12.6 3.32 12.6c-.36-.92-.88-1.16-.88-1.16-.72-.49.06-.48.06-.48.79.06 1.21.82 1.21.82.71 1.21 1.85.86 2.3.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        Star
+      </a>
+    </div>
+
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" data-cursor="link">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav__progress" aria-hidden="true"><i></i></div>
+</header>
+
+<main id="main">
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="hero" id="top">
+    <canvas class="hero__canvas" id="gl" aria-hidden="true"></canvas>
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="shell hero__inner">
+      <p class="eyebrow reveal">
+        <span class="dot" aria-hidden="true"></span>
+        Free · Open source (MIT) · Self-improving
+      </p>
+
+      <h1 class="hero__title reveal" data-delay="1">
+        The AI agent that does not<br class="br-sm" />
+        <span class="grad">just talk</span> — <span class="grad-2">it does the work.</span>
+      </h1>
+
+      <p class="hero__lede reveal" data-delay="2">
+        Give AgentFOXXY a job in plain words. It plans the steps, writes the code, runs it in a
+        real terminal, opens a real browser, reads your files, fixes its own errors and keeps going
+        until the job is done. Then it <b>teaches itself</b>, so the next one is faster.
+      </p>
+
+      <div class="hero__actions reveal" data-delay="3">
+        <a class="btn btn--primary btn--lg magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/releases/latest" target="_blank" rel="noopener" data-cursor="link">
+          Download desktop app
+          <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><path d="M10 3v10m0 0 4-4m-4 4-4-4M3 16h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn--outline btn--lg magnetic" href="#install" data-cursor="link">
+          Install with one command
+        </a>
+        <button class="btn btn--ghost btn--lg copy" type="button" data-copy-text="curl -fsSL https://raw.githubusercontent.com/usmanxg58-byte/AgentFOXXY/main/scripts/install.sh | bash" data-cursor="link" aria-label="Copy install command">
+          <code>curl -fsSL …/install.sh | bash</code>
+        </button>
+      </div>
+
+      <p class="hero__note reveal" data-delay="4">
+        Linux · macOS · Windows · WSL2 · Termux (Android) — the installer ships its own Python 3.11, Node.js, ripgrep and ffmpeg. No admin rights.
+      </p>
+
+      <ul class="badges reveal" data-delay="5" aria-label="Project facts">
+        <li><img src="https://img.shields.io/github/stars/usmanxg58-byte/AgentFOXXY?style=for-the-badge&color=F59E0B" alt="GitHub stars" loading="lazy" /></li>
+        <li><img src="https://img.shields.io/github/v/release/usmanxg58-byte/AgentFOXXY?style=for-the-badge&color=EA580C" alt="Latest release" loading="lazy" /></li>
+        <li><img src="https://img.shields.io/badge/Python-3.11-FB923C?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.11" loading="lazy" /></li>
+        <li><img src="https://img.shields.io/badge/Platforms-Linux%20%7C%20macOS%20%7C%20Windows-FBBF24?style=for-the-badge" alt="Platforms" loading="lazy" /></li>
+        <li><img src="https://img.shields.io/badge/Providers-35%2B-EA580C?style=for-the-badge" alt="35+ model providers" loading="lazy" /></li>
+        <li><img src="https://img.shields.io/badge/Powers-40%2B-F59E0B?style=for-the-badge" alt="40+ powers" loading="lazy" /></li>
+      </ul>
+    </div>
+
+    <div class="hero__stats shell" aria-label="At a glance">
+      <div class="stat reveal"><b class="count" data-to="40" data-suffix="+">0</b><span>powers</span></div>
+      <div class="stat reveal" data-delay="1"><b class="count" data-to="35" data-suffix="+">0</b><span>AI providers</span></div>
+      <div class="stat reveal" data-delay="2"><b class="count" data-to="16" data-suffix=" +21">0</b><span>built-in &amp; pack skills</span></div>
+      <div class="stat reveal" data-delay="3"><b class="count" data-to="5">0</b><span>chat platforms</span></div>
+      <div class="stat reveal" data-delay="4"><b>$0</b><span>forever, MIT</span></div>
+    </div>
+
+    <a class="scroll-hint" href="#why" aria-label="Scroll to content" data-cursor="link">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- ══════════════════════ MARQUEE ══════════════════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marquee"></div>
+  </div>
+
+  <!-- ══════════════════════ WHY ══════════════════════ -->
+  <section class="section" id="why">
+    <div class="shell">
+      <header class="section__head reveal">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Why AgentFOXXY</p>
+        <h2 class="section__title">Most agents answer.<br /><span class="grad">This one finishes.</span></h2>
+        <p class="section__lede">
+          An agent that only talks is a chatbot. AgentFOXXY gets a real terminal, a real browser, your
+          real files — and it writes down what it learned so it never has to be taught the same thing twice.
+        </p>
+      </header>
+
+      <div class="cards cards--5">
+        <article class="card card--feature reveal">
+          <div class="card__ico" aria-hidden="true">⚙️</div>
+          <h3>It executes</h3>
+          <p>Shell commands, processes, whole-project code edits, browser clicks and form fills. Real actions, not suggestions.</p>
+        </article>
+        <article class="card card--feature reveal" data-delay="1">
+          <div class="card__ico" aria-hidden="true">🧠</div>
+          <h3>It remembers</h3>
+          <p>Persistent memory across sessions plus searchable history. Find that command from last week in one search.</p>
+        </article>
+        <article class="card card--feature reveal" data-delay="2">
+          <div class="card__ico" aria-hidden="true">📚</div>
+          <h3>It self-improves</h3>
+          <p>When it solves something hard it saves the method as a reusable skill. 16 built in, 21 optional packs.</p>
+        </article>
+        <article class="card card--feature reveal" data-delay="3">
+          <div class="card__ico" aria-hidden="true">🌐</div>
+          <h3>It is model-free</h3>
+          <p>35+ providers — OpenAI, Anthropic, Gemini, DeepSeek, Ollama and more. Switch with one command. Run fully offline.</p>
+        </article>
+        <article class="card card--feature reveal" data-delay="4">
+          <div class="card__ico" aria-hidden="true">🕊️</div>
+          <h3>It is free</h3>
+          <p>MIT licensed, no subscriptions, no lock-in, no telemetry middleman. You pick the provider, you hold the keys.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ POWERS ══════════════════════ -->
+  <section class="section section--alt" id="powers">
+    <div class="shell">
+      <header class="section__head reveal">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>All 40+ powers</p>
+        <h2 class="section__title">Everything it can <span class="grad">actually do</span></h2>
+        <p class="section__lede">
+          40+ powers in total. Everything documented in the project README is below — plus 16 built-in
+          skills and 21 optional skill packs (finance, security, devops, research, writing) you can switch on.
+        </p>
+      </header>
+
+      <div class="filters reveal" role="group" aria-label="Filter powers by category">
+        <button class="chip is-on" type="button" data-filter="all" data-cursor="link">All</button>
+        <button class="chip" type="button" data-filter="web" data-cursor="link">Web &amp; browser</button>
+        <button class="chip" type="button" data-filter="build" data-cursor="link">Build &amp; code</button>
+        <button class="chip" type="button" data-filter="media" data-cursor="link">Media</button>
+        <button class="chip" type="button" data-filter="brain" data-cursor="link">Memory &amp; skills</button>
+        <button class="chip" type="button" data-filter="scale" data-cursor="link">Scale &amp; automate</button>
+        <button class="chip" type="button" data-filter="world" data-cursor="link">Your world</button>
+        <button class="chip" type="button" data-filter="ext" data-cursor="link">Extend</button>
+      </div>
+
+      <div class="powers" id="powers-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ COMPARE ══════════════════════ -->
+  <section class="section" id="compare">
+    <div class="shell">
+      <header class="section__head reveal">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Comparison</p>
+        <h2 class="section__title">Everything Claude Code charges for — <span class="grad2">free</span></h2>
+        <p class="section__lede">The project's own feature matrix, as published in the README.</p>
+      </header>
+
+      <div class="table-wrap reveal">
+        <table class="cmp">
+          <caption class="sr-only">Feature comparison between AgentFOXXY, Hermes Agent and Claude Code</caption>
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col" class="is-us">🦊 AgentFOXXY</th>
+              <th scope="col">Hermes Agent</th>
+              <th scope="col">Claude Code</th>
+            </tr>
+          </thead>
+          <tbody id="cmp-body"></tbody>
+        </table>
+      </div>
+
+      <p class="fineprint reveal">
+        Also included: desktop control, media generation, phone messaging, smart home, Spotify, a multi-agent
+        swarm, a Windows desktop app, Android via Termux, MCP, fully offline runs and persistent memory.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ INSTALL ══════════════════════ -->
+  <section class="section section--alt" id="install">
+    <div class="shell">
+      <header class="section__head reveal">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Install</p>
+        <h2 class="section__title">Three ways in. <span class="grad">Pick one.</span></h2>
+        <p class="section__lede">No clone needed. The installer brings its own Python 3.11, Node.js, ripgrep and ffmpeg — and needs no admin rights.</p>
+      </header>
+
+      <div class="tabs reveal" data-tabs>
+        <div class="tabs__list" role="tablist" aria-label="Install methods">
+          <button class="tab is-on" role="tab" id="tab-desktop" aria-controls="panel-desktop" aria-selected="true" type="button" data-cursor="link">
+            <span class="tab__n">01</span> Desktop app <em>Windows · macOS</em>
+          </button>
+          <button class="tab" role="tab" id="tab-command" aria-controls="panel-command" aria-selected="false" tabindex="-1" type="button" data-cursor="link">
+            <span class="tab__n">02</span> One command <em>Linux · macOS · WSL2 · Termux</em>
+          </button>
+          <button class="tab" role="tab" id="tab-source" aria-controls="panel-source" aria-selected="false" tabindex="-1" type="button" data-cursor="link">
+            <span class="tab__n">03</span> From source <em>Developers</em>
+          </button>
+        </div>
+
+        <!-- Desktop -->
+        <div class="tabs__panel is-on" role="tabpanel" id="panel-desktop" aria-labelledby="tab-desktop" tabindex="0">
+          <p class="panel__lede">Download, double-click, done. No terminal needed.</p>
+          <div class="panel__row">
+            <a class="btn btn--primary magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/releases/latest" target="_blank" rel="noopener" data-cursor="link">Download latest release</a>
+            <span class="panel__hint">Runs the same agent core as the CLI.</span>
+          </div>
+          <div class="files">
+            <div class="file"><code>AgentFOXXY-*-win-x64.exe</code><span>Windows — normal install</span></div>
+            <div class="file"><code>AgentFOXXY-*-win-x64.msi</code><span>Windows — silent / company deploy</span></div>
+            <div class="file"><code>AgentFOXXY-*-mac-arm64.dmg</code><span>macOS Apple Silicon (M1–M4)</span></div>
+            <div class="file"><code>AgentFOXXY-*-mac-x64.dmg</code><span>macOS Intel</span></div>
+          </div>
+          <div class="notes">
+            <p><b>Windows:</b> the first run may warn “unknown publisher” — click <b>More info → Run anyway</b>.</p>
+            <p><b>macOS:</b> right-click → Open (first time only), or run <code>xattr -cr /Applications/AgentFOXXY.app</code>.</p>
+          </div>
+        </div>
+
+        <!-- One command -->
+        <div class="tabs__panel" role="tabpanel" id="panel-command" aria-labelledby="tab-command" tabindex="0" hidden>
+          <p class="panel__lede">Linux, macOS, WSL2 and Termux (Android).</p>
+
+          <div class="codeblock" data-shell="bash">
+            <div class="codeblock__bar"><span class="dots"><i></i><i></i><i></i></span><span class="codeblock__lang">bash</span>
+              <button class="copy" type="button" data-copy="#cmd-bash" data-cursor="link">Copy</button>
+            </div>
+            <pre><code id="cmd-bash">curl -fsSL https://raw.githubusercontent.com/usmanxg58-byte/AgentFOXXY/main/scripts/install.sh | bash</code></pre>
+          </div>
+
+          <p class="panel__lede panel__lede--tight">Windows PowerShell:</p>
+          <div class="codeblock" data-shell="powershell">
+            <div class="codeblock__bar"><span class="dots"><i></i><i></i><i></i></span><span class="codeblock__lang">powershell</span>
+              <button class="copy" type="button" data-copy="#cmd-ps" data-cursor="link">Copy</button>
+            </div>
+            <pre><code id="cmd-ps">iex (irm https://raw.githubusercontent.com/usmanxg58-byte/AgentFOXXY/main/scripts/install.ps1)</code></pre>
+          </div>
+
+          <p class="panel__lede panel__lede--tight">Then open a new shell and start it:</p>
+          <div class="codeblock" data-shell="bash">
+            <div class="codeblock__bar"><span class="dots"><i></i><i></i><i></i></span><span class="codeblock__lang">bash</span>
+              <button class="copy" type="button" data-copy="#cmd-start" data-cursor="link">Copy</button>
+            </div>
+            <pre><code id="cmd-start">source ~/.bashrc
+agentfoxxy</code></pre>
+          </div>
+        </div>
+
+        <!-- Source -->
+        <div class="tabs__panel" role="tabpanel" id="panel-source" aria-labelledby="tab-source" tabindex="0" hidden>
+          <p class="panel__lede">For developers who want to read the code.</p>
+          <div class="codeblock" data-shell="bash">
+            <div class="codeblock__bar"><span class="dots"><i></i><i></i><i></i></span><span class="codeblock__lang">bash</span>
+              <button class="copy" type="button" data-copy="#cmd-source" data-cursor="link">Copy</button>
+            </div>
+            <pre><code id="cmd-source">git clone https://github.com/usmanxg58-byte/AgentFOXXY.git
+cd AgentFOXXY
+uv pip install -e ".[all]"
+agentfoxxy</code></pre>
+          </div>
+          <p class="panel__hint">Requires Python 3.11+. Use <code>".[all,dev]"</code> for the dev toolchain.</p>
+        </div>
+      </div>
+
+      <div class="install-links reveal">
+        <a class="pill magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/releases/latest" target="_blank" rel="noopener" data-cursor="link">⬇ Releases</a>
+        <a class="pill magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY#install" target="_blank" rel="noopener" data-cursor="link">📄 Install section in README</a>
+        <a class="pill magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/scripts/install.sh" target="_blank" rel="noopener" data-cursor="link">📜 install.sh</a>
+        <a class="pill magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/scripts/install.ps1" target="_blank" rel="noopener" data-cursor="link">📜 install.ps1</a>
+        <a class="pill magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/NOTICE.md" target="_blank" rel="noopener" data-cursor="link">⚖ NOTICE.md</a>
+        <a class="pill magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/LICENSE" target="_blank" rel="noopener" data-cursor="link">⚖ MIT License</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ USE ══════════════════════ -->
+  <section class="section" id="use">
+    <div class="shell">
+      <header class="section__head reveal">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Quick start</p>
+        <h2 class="section__title">Two commands and it <span class="grad">knows your setup</span></h2>
+      </header>
+
+      <div class="split">
+        <div class="codeblock codeblock--tall reveal" data-shell="bash">
+          <div class="codeblock__bar"><span class="dots"><i></i><i></i><i></i></span><span class="codeblock__lang">bash</span>
+            <button class="copy" type="button" data-copy="#cmd-quick" data-cursor="link">Copy all</button>
+          </div>
+          <pre><code id="cmd-quick">agentfoxxy setup        <span class="c"># one wizard: model, keys, tools</span>
+agentfoxxy              <span class="c"># start talking</span>
+
+agentfoxxy model        <span class="c"># switch AI provider or model</span>
+agentfoxxy tools        <span class="c"># turn powers on and off</span>
+agentfoxxy gateway      <span class="c"># Telegram / Discord / Slack / WhatsApp / Signal</span>
+agentfoxxy -z "..."     <span class="c"># run one job and exit</span>
+agentfoxxy update       <span class="c"># update in place</span>
+agentfoxxy doctor       <span class="c"># something broken? start here</span></code></pre>
+        </div>
+
+        <div class="use-side">
+          <div class="card reveal">
+            <h3>Talk to it from your phone</h3>
+            <p>Same agent, same memory, same conversation — on Telegram, Discord, Slack, WhatsApp or Signal.</p>
+            <div class="codeblock codeblock--sm" data-shell="bash">
+              <div class="codeblock__bar"><span class="codeblock__lang">bash</span>
+                <button class="copy" type="button" data-copy="#cmd-gw" data-cursor="link">Copy</button>
+              </div>
+              <pre><code id="cmd-gw">agentfoxxy gateway setup
+agentfoxxy gateway start</code></pre>
+            </div>
+          </div>
+
+          <div class="card reveal" data-delay="1">
+            <h3>Slash commands work in both</h3>
+            <div class="table-wrap table-wrap--tight">
+              <table class="cmp cmp--slim">
+                <caption class="sr-only">Slash commands for terminal and messaging platforms</caption>
+                <thead><tr><th scope="col">Action</th><th scope="col">Terminal</th><th scope="col">Telegram · Discord · Slack · WhatsApp · Signal</th></tr></thead>
+                <tbody>
+                  <tr><td>New session</td><td><code>/new</code></td><td><code>/new</code></td></tr>
+                  <tr><td>Switch model</td><td><code>/model</code></td><td><code>/model</code></td></tr>
+                  <tr><td>Personality</td><td><code>/personality</code></td><td><code>/personality</code></td></tr>
+                  <tr><td>Retry / undo</td><td><code>/retry</code> <code>/undo</code></td><td><code>/retry</code> <code>/undo</code></td></tr>
+                  <tr><td>Run a skill</td><td><code>/skills</code></td><td><code>/&lt;name&gt;</code></td></tr>
+                  <tr><td>Stop</td><td><code>Ctrl+C</code></td><td><code>/stop</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="providers reveal">
+        <h3 class="providers__title">35+ AI model providers — switch with one command</h3>
+        <ul class="providers__list" id="providers-list"></ul>
+        <p class="panel__hint">…plus any OpenAI-compatible endpoint. Point it at Ollama on your own machine and nothing leaves the building.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ GOOD TO KNOW ══════════════════════ -->
+  <section class="section section--alt" id="trust">
+    <div class="shell">
+      <header class="section__head reveal">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Good to know</p>
+        <h2 class="section__title">The boring parts, <span class="grad">handled</span></h2>
+      </header>
+      <div class="cards cards--4">
+        <article class="card reveal">
+          <div class="card__ico" aria-hidden="true">🛡️</div>
+          <h3>Asks before risky commands</h3>
+          <p>You approve once, or add a pattern to your allowlist. It never silently does something dangerous.</p>
+        </article>
+        <article class="card reveal" data-delay="1">
+          <div class="card__ico" aria-hidden="true">🔑</div>
+          <h3>Your keys stay yours</h3>
+          <p>You pick the provider. The agent talks to it directly. There is no middleman holding your credentials.</p>
+        </article>
+        <article class="card reveal" data-delay="2">
+          <div class="card__ico" aria-hidden="true">✈️</div>
+          <h3>Runs fully offline</h3>
+          <p>Point it at Ollama locally. No telemetry, no cloud dependency, nothing sent anywhere.</p>
+        </article>
+        <article class="card reveal" data-delay="3">
+          <div class="card__ico" aria-hidden="true">🧰</div>
+          <h3>Modest requirements</h3>
+          <p>Python 3.11+ on Linux, macOS or Windows. The installer handles the rest of the toolchain.</p>
+        </article>
+      </div>
+
+      <div class="contrib reveal">
+        <div>
+          <h3>Want to build on it?</h3>
+          <p>Pull requests welcome — open an issue first for big changes.</p>
+        </div>
+        <div class="codeblock codeblock--sm" data-shell="bash">
+          <div class="codeblock__bar"><span class="codeblock__lang">contributing</span>
+            <button class="copy" type="button" data-copy="#cmd-contrib" data-cursor="link">Copy</button>
+          </div>
+          <pre><code id="cmd-contrib">cd "${AGENTFOXXY_HOME:-$HOME/.agentfoxxy}/agentfoxxy-agent"
+uv pip install -e ".[all,dev]"
+scripts/run_tests.sh</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FAQ ══════════════════════ -->
+  <section class="section" id="faq">
+    <div class="shell shell--narrow">
+      <header class="section__head reveal">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>FAQ</p>
+        <h2 class="section__title">Questions, <span class="grad">answered</span></h2>
+      </header>
+
+      <div class="faq" id="faq-list">
+        <details class="faq__item reveal" open>
+          <summary data-cursor="link"><span>What is AgentFOXXY?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>A free, open-source AI agent that actually does work. Give it a job in plain words: it plans, codes, runs commands in a real terminal, drives a real browser, reads your files, fixes its own errors and finishes. What it learns is saved as a reusable skill.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>Is it really free?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>Yes — MIT licensed, no subscription, no lock-in. If you connect a paid model provider, that provider bills you; the agent itself is free. You can also run it fully offline against Ollama.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>What do I need installed?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>Python 3.11+ on Linux, macOS or Windows. The one-command installer brings its own Python 3.11, Node.js, ripgrep and ffmpeg, and needs no admin rights. Desktop app users need nothing at all.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>Which AI providers can I use?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>35+ of them: OpenAI, Anthropic, Google Gemini, DeepSeek, Qwen, xAI Grok, AWS Bedrock, Azure OpenAI, OpenRouter, Ollama, Mistral, Cohere, Together AI — and any OpenAI-compatible endpoint. Switch with <code>agentfoxxy model</code>.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>Can I use it from my phone?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>Yes. Run <code>agentfoxxy gateway setup</code>, then <code>gateway start</code>, and message the bot on Telegram, Discord, Slack, WhatsApp or Signal. Same agent, same memory as your terminal.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>What is MCP and why does it matter?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>MCP (Model Context Protocol) is the open standard for connecting agents to tools and data sources. AgentFOXXY speaks it, so any MCP-compatible server can be plugged in to add more powers.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>How does it keep getting better?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>When it solves something hard it saves the method as a skill — 16 built in, plus 21 optional packs covering finance, security, devops, research and writing. You can read, edit, share or delete any skill.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>Is my data safe?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>You choose the provider and the agent talks to it directly, so there is no middleman. It asks before running risky commands. Run it against a local Ollama model and nothing leaves your machine at all.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>Is this related to Hermes Agent?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>Yes. AgentFOXXY is built on the Hermes Agent open-source project; see <a href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/NOTICE.md" target="_blank" rel="noopener" data-cursor="link">NOTICE.md</a> for attribution. It is an independent community project and is not affiliated with Nous Research.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary data-cursor="link"><span>Something is broken — now what?</span><i aria-hidden="true"></i></summary>
+          <div class="faq__body"><p>Run <code>agentfoxxy doctor</code> first. If that does not solve it, open an issue or a discussion on GitHub and include the output.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CTA ══════════════════════ -->
+  <section class="cta">
+    <div class="shell">
+      <div class="cta__box reveal">
+        <p class="cta__emoji" aria-hidden="true">🦊</p>
+        <h2>Give it a job.<br /><span class="grad">Watch it finish.</span></h2>
+        <p>Free forever, MIT licensed, running on your machine. One command and it starts talking.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary btn--lg magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY/releases/latest" target="_blank" rel="noopener" data-cursor="link">Download for desktop</a>
+          <a class="btn btn--outline btn--lg magnetic" href="https://github.com/usmanxg58-byte/AgentFOXXY" target="_blank" rel="noopener" data-cursor="link">View on GitHub</a>
+        </div>
+        <div class="cta__cmd">
+          <code>curl -fsSL https://raw.githubusercontent.com/usmanxg58-byte/AgentFOXXY/main/scripts/install.sh | bash</code>
+          <button class="copy" type="button" data-copy-text="curl -fsSL https://raw.githubusercontent.com/usmanxg58-byte/AgentFOXXY/main/scripts/install.sh | bash" data-cursor="link" aria-label="Copy install command">Copy</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href="#top" data-cursor="link">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5l7 5M28 5l-7 5" />
+              <path d="M16 10c5 0 9 4 9 9s-4 8-9 8-9-3-9-8 4-9 9-9Z" />
+              <path d="M11.5 18.5l2.2 2.2M20.5 18.5l-2.2 2.2" />
+            </svg>
+          </span>
+          <span class="brand__text">Agent<b>FOXXY</b></span>
+        </a>
+        <p>The free AI agent with 40+ powers. Self-improving, model-free, runs anywhere.</p>
+        <p class="footer__meta">
+          MIT licensed · Built on the Hermes Agent open-source project ·
+          Independent community project, not affiliated with Nous Research.
+        </p>
+      </div>
+
+      <nav class="footer__col" aria-label="Project links">
+        <h4>Project</h4>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY" target="_blank" rel="noopener" data-cursor="link">GitHub repository</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/releases/latest" target="_blank" rel="noopener" data-cursor="link">Latest release</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/releases" target="_blank" rel="noopener" data-cursor="link">All releases</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/stargazers" target="_blank" rel="noopener" data-cursor="link">Star it</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/NOTICE.md" target="_blank" rel="noopener" data-cursor="link">NOTICE.md</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/LICENSE" target="_blank" rel="noopener" data-cursor="link">MIT License</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Community links">
+        <h4>Community</h4>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/issues" target="_blank" rel="noopener" data-cursor="link">Report an issue</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/discussions" target="_blank" rel="noopener" data-cursor="link">Discussions</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" data-cursor="link">Contributing</a>
+        <a href="https://github.com/usmanxg58-byte" target="_blank" rel="noopener" data-cursor="link">Maintainer: @usmanxg58-byte</a>
+        <a href="https://x.com/theagentfoxxy?s=11" target="_blank" rel="noopener" data-cursor="link">X / Twitter</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Translations">
+        <h4>Readme</h4>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/README.md" target="_blank" rel="noopener" data-cursor="link">English</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/README.zh-CN.md" target="_blank" rel="noopener" data-cursor="link">简体中文</a>
+        <a href="https://github.com/usmanxg58-byte/AgentFOXXY/blob/main/README.ur-pk.md" target="_blank" rel="noopener" data-cursor="link">اردو</a>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p>🦊 AgentFOXXY — built and maintained by <a href="https://github.com/usmanxg58-byte" target="_blank" rel="noopener" data-cursor="link">@usmanxg58-byte</a></p>
+      <p>All product names and links belong to their respective owners. This page is an unofficial community showcase.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>
